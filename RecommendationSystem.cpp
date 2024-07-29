@@ -39,7 +39,7 @@ double RecommendationSystem::calculate_features_similarity (const features_list
   double mult_features = scalar_mult (features_1, features_2);
   double norm_f1 = sqrt(scalar_mult (features_1, features_1));
   double norm_f2 = sqrt(scalar_mult (features_2, features_2));
-  return mult_features/norm_f1*norm_f2;
+  return mult_features/(norm_f1*norm_f2);
 }
 
 
