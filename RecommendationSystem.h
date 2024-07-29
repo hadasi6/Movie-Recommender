@@ -6,11 +6,19 @@
 #define RECOMMENDATIONSYSTEM_H
 #include <map>
 #include "User.h"
+#include "Movie.h"
+
+struct SpMovieComparator {
+    bool operator()(const sp_movie& lhs, const sp_movie& rhs) const {
+      return *lhs < *rhs;
+    }
+};
 
 //typedef std::unordered_map<sp_movie, features_list , hash_func, equal_func>
 //movie_map;
 
-typedef std::map<sp_movie, features_list> movie_map;
+//typedef std::map<sp_movie, features_list, equal_func> movie_map;
+typedef std::map<sp_movie, features_list, SpMovieComparator> movie_map;
 
 class RecommendationSystem
 {
@@ -68,7 +76,7 @@ public:
 	 * @return shared pointer to movie in system
 	 */
 	//TODO get_movie
-    sp_movie get_movie(const std::string& name, int year) const;
+    [[nodiscard]] sp_movie get_movie(const std::string& name, int year) const;
 
 
 	// TODO operator<<

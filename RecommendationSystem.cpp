@@ -14,8 +14,10 @@ sp_movie RecommendationSystem::add_movie_to_rs(const std::string &name,
                                                const features_list &features)
 {
   sp_movie cur_movie =  std::make_shared<Movie>(name, year);
-  _movie_map.insert ({cur_movie, features});
-  return this->get_movie (name, year);
+  auto res = _movie_map.insert ({cur_movie, features});
+  return res.first->first;
+//  return _movie_map.rbegin();
+//  return this->get_movie (name, year);
 }
 
 
@@ -152,8 +154,8 @@ double RecommendationSystem::predict_movie_score (const User &user,
 }
 
 
-sp_movie RecommendationSystem::get_movie (const std::string& name,
-                                                  int year) const
+[[nodiscard]] sp_movie RecommendationSystem::get_movie (const std::string&
+                                                        name, int year) const
 {
   sp_movie temp_movie = std::make_shared<Movie>(name, year);
   auto it = _movie_map.find (temp_movie);
