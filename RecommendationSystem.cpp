@@ -23,7 +23,7 @@ double RecommendationSystem::scalar_mult(const features_list
                    &features_1, const features_list &features_2)
 {
   double sum = 0;
-  for (int i=0; i<features_1.size(); i++)
+  for (size_t i=0; i<features_1.size(); i++)
   {
     sum += features_1[i]*features_2[i];
   }
@@ -143,7 +143,7 @@ double RecommendationSystem::predict_movie_score (const User &user,
 
   double numerator = 0.0;
   double denominator = 0.0;
-  for (size_t i = 0; i < k; i++)
+  for (int i = 0; i < k; i++)
   {
     numerator += similarity_and_rank[i].first*similarity_and_rank[i].second;
     denominator += similarity_and_rank[i].first;
@@ -152,7 +152,7 @@ double RecommendationSystem::predict_movie_score (const User &user,
 }
 
 
-const sp_movie & RecommendationSystem::get_movie (const std::string& name,
+sp_movie RecommendationSystem::get_movie (const std::string& name,
                                                   int year) const
 {
   sp_movie temp_movie = std::make_shared<Movie>(name, year);

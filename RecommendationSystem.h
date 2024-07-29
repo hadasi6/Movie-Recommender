@@ -68,7 +68,7 @@ public:
 	 * @return shared pointer to movie in system
 	 */
 	//TODO get_movie
-    const sp_movie & get_movie(const std::string& name, int year) const;
+    sp_movie get_movie(const std::string& name, int year) const;
 
 
 	// TODO operator<<
