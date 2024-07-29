@@ -17,7 +17,7 @@ class RecommendationSystemLoader {
    */
 //  static /*ptr_type*/ create_rs_from_movies
 //      (const std::string &movies_file_path) noexcept (false);
-  static std::unique_ptr<RecommendationSystem> create_rs_from_movies
+  static std::shared_ptr<RecommendationSystem> create_rs_from_movies
 	  (const std::string &movies_file_path) noexcept (false);
 };
 

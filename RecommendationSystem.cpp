@@ -43,7 +43,6 @@ double RecommendationSystem::calculate_features_similarity (const features_list
 }
 
 
-
 sp_movie RecommendationSystem::recommend_by_content (const User &user)
 {
   //stage 1: calculate user ranks' average and subtract it from its ranks.
@@ -52,16 +51,22 @@ sp_movie RecommendationSystem::recommend_by_content (const User &user)
 //  rank_map norm_rank; //?
   rank_map norm_rank = user.get_ranks(); //todo ?
 //  double ranks_average;
-  for (const auto & it : user.get_ranks())
+  for (auto & pair :norm_rank)
   {
-    sum_ranks += it.second;
-    count += 1;
+    if (pair.second != 0)
+    {
+      count+=1;
+      sum_ranks += pair.second;
+    }
   }
 
   double ranks_average = sum_ranks / count;
-  for (const auto & it: user.get_ranks())
+  for (auto & pair:norm_rank)
   {
-    norm_rank[it.first] = it.second-ranks_average;
+    if (pair.second != 0)
+    {
+      pair.second -= ranks_average;
+    }
   }
 
   features_list user_profile;
@@ -75,36 +80,100 @@ sp_movie RecommendationSystem::recommend_by_content (const User &user)
     }
   }
 
-  for (const auto &it: norm_rank)
+  for (const auto &pair: norm_rank)
   {
-    auto movie_it = _movie_map.find (it.first);
+    auto movie_it = _movie_map.find (pair.first);
     if (movie_it != _movie_map.end ())
     {
       const features_list &features = movie_it->second;
       for (size_t i = 0; i < features.size (); i++)
       {
-        user_profile[i] += it.second * features[i];
+        user_profile[i] += pair.second * features[i];
       }
     }
   }
 
-    sp_movie best_movie = nullptr;
-    double highest_score = 0;
-    for (const auto &pair: _movie_map)
+  sp_movie best_movie = nullptr;
+  double highest_score = 0;
+  for (const auto &pair: _movie_map)
+  {
+    if (user.get_ranks().find(pair.first) == user.get_ranks().end() || user.get_ranks().at(pair.first) == 0)
     {
-      if (user.get_ranks().find(pair.first) == user.get_ranks().end())
+      double similarity = calculate_features_similarity (user_profile,
+                                                         pair.second);
+      if (similarity>highest_score)
       {
-        double similarity = calculate_features_similarity (user_profile,
-                                                           pair.second);
-        if (similarity>highest_score)
-        {
-          highest_score = similarity;
-          best_movie = pair.first;
-        }
+        highest_score = similarity;
+        best_movie = pair.first;
       }
     }
+  }
   return best_movie;
 }
+
+
+
+//sp_movie RecommendationSystem::recommend_by_content (const User &user)
+//{
+//  //stage 1: calculate user ranks' average and subtract it from its ranks.
+//  double sum_ranks=0;
+//  double count = 0;
+////  rank_map norm_rank; //?
+//  rank_map norm_rank = user.get_ranks(); //todo ?
+////  double ranks_average;
+//  for (const auto & it : user.get_ranks())
+//  {
+//    sum_ranks += it.second;
+//    count += 1;
+//  }
+//
+//  double ranks_average = sum_ranks / count;
+//  for (const auto & it: user.get_ranks())
+//  {
+//    norm_rank[it.first] = it.second-ranks_average;
+//  }
+//
+//  features_list user_profile;
+//
+//  for (const auto &pair: _movie_map)
+//  {
+//    if (!pair.second.empty ())
+//    {
+//      user_profile = std::vector<double> (pair.second.size (), 0.0);
+//      break;
+//    }
+//  }
+//
+//  for (const auto &it: norm_rank)
+//  {
+//    auto movie_it = _movie_map.find (it.first);
+//    if (movie_it != _movie_map.end ())
+//    {
+//      const features_list &features = movie_it->second;
+//      for (size_t i = 0; i < features.size (); i++)
+//      {
+//        user_profile[i] += it.second * features[i];
+//      }
+//    }
+//  }
+//
+//    sp_movie best_movie = nullptr;
+//    double highest_score = 0;
+//    for (const auto &pair: _movie_map)
+//    {
+//      if (user.get_ranks().find(pair.first) == user.get_ranks().end())
+//      {
+//        double similarity = calculate_features_similarity (user_profile,
+//                                                           pair.second);
+//        if (similarity>highest_score)
+//        {
+//          highest_score = similarity;
+//          best_movie = pair.first;
+//        }
+//      }
+//    }
+//  return best_movie;
+//}
 
 
 sp_movie RecommendationSystem::recommend_by_cf (const User &user, int k)
