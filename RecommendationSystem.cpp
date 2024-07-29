@@ -49,13 +49,15 @@ sp_movie RecommendationSystem::recommend_by_content (const User &user)
   //stage 1: calculate user ranks' average and subtract it from its ranks.
   double sum_ranks=0;
   double count = 0;
-  rank_map norm_rank;
+//  rank_map norm_rank; //?
+  rank_map norm_rank = user.get_ranks(); //todo ?
 //  double ranks_average;
   for (const auto & it : user.get_ranks())
   {
     sum_ranks += it.second;
     count += 1;
   }
+
   double ranks_average = sum_ranks / count;
   for (const auto & it: user.get_ranks())
   {
