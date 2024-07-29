@@ -109,13 +109,20 @@ sp_movie RecommendationSystem::recommend_by_cf (const User &user, int k)
 {
 //  std::set<>
   sp_movie best_movie = nullptr;
+  bool flag_first_movie = false;
   double highest_predict_score = -1.0; // todo if rate=0
   for (const auto &pair: _movie_map)
   {
     if (user.get_ranks().find (pair.first)== user.get_ranks().end())
     {
       double predict_score = predict_movie_score (user, pair.first, k);
-      if (predict_score > highest_predict_score)
+      if (!flag_first_movie)
+      {
+        highest_predict_score = predict_score;
+        best_movie = pair.first;
+        flag_first_movie= true;
+      }
+      else if (predict_score > highest_predict_score)
       {
         highest_predict_score = predict_score;
         best_movie = pair.first;
