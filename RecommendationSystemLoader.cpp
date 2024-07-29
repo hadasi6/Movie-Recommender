@@ -5,12 +5,14 @@
 #define YEAR_SEPARATOR '-'
 #define ERROR_MSG "input file is incorrect"
 
-
-std::shared_ptr<RecommendationSystem> RecommendationSystemLoader::create_rs_from_movies(const
+//std::shared_ptr<RecommendationSystem> RecommendationSystemLoader::create_rs_from_movies(const
+//std::string &movies_file_path) noexcept(false)
+std::unique_ptr<RecommendationSystem>
+    RecommendationSystemLoader::create_rs_from_movies(const
 std::string &movies_file_path) noexcept(false)
 {
-    std::shared_ptr<RecommendationSystem> rs =
-        std::make_shared<RecommendationSystem>();
+    std::unique_ptr<RecommendationSystem> rs =
+        std::make_unique<RecommendationSystem>();
 //  /*fill in ptr_type*/ rs = /*use the right std::make... */
     std::ifstream in_file;
     in_file.open(movies_file_path);

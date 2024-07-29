@@ -1,13 +1,12 @@
 #include "User.h"
 #include "RecommendationSystem.h"
 
-User::User (std::string &user_name, rank_map &r_map,
-            std::shared_ptr<RecommendationSystem> &rs): _user_name
-            (std::move (user_name)), _rank_map(r_map), _system(rs)
+User::User (std::string user_name, rank_map r_map,
+            std::shared_ptr<RecommendationSystem> rs)
 {
-//  _user_name = user_name;
-//  _rank_map = r_map;
-//  _system = rs;
+  _user_name = std::move (user_name);
+  _rank_map = std::move (r_map);
+  _system = std::move (rs);
 }
 
 const std::string &User::get_name () const
