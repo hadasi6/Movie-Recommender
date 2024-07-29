@@ -15,7 +15,7 @@ sp_movie RecommendationSystem::add_movie_to_rs(const std::string &name,
 {
   sp_movie cur_movie =  std::make_shared<Movie>(name, year);
   _movie_map.insert ({cur_movie, features});
-  return cur_movie;
+  return this->get_movie (name, year);
 }
 
 
