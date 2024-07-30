@@ -19,10 +19,10 @@ sp_movie RecommendationSystem::add_movie_to_rs(const std::string &name,
                                                const features_list &features)
 {
   sp_movie cur_movie =  std::make_shared<Movie>(name, year);
-  auto res = _movie_map.insert ({cur_movie, features});
-  return res.first->first;
-//  return _movie_map.rbegin();
-//  return this->get_movie (name, year);
+//  auto res = _movie_map.insert ({cur_movie, features});
+  _movie_map[cur_movie] = features;
+  return cur_movie;
+//  return res.first->first;
 }
 
 
