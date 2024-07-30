@@ -11,7 +11,7 @@
 
 std::vector<User>
 UsersLoader::create_users
-(const std::string &users_file_path, std::shared_ptr<RecommendationSystem> rs)
+(const std::string &users_file_path, std::unique_ptr<RecommendationSystem> rs)
 noexcept(false)
 //UsersLoader::create_users
 //    (const std::string &users_file_path, /*ptr_type*/ rs)
