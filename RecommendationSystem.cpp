@@ -23,7 +23,7 @@ double RecommendationSystem::scalar_mult (const features_list
 }
 
 double RecommendationSystem::calculate_features_similarity (const features_list
-                                                            &features_1, const features_list &features_2)
+&features_1, const features_list &features_2)
 {
   double mult_features = scalar_mult (features_1, features_2);
   double norm_f1 = sqrt (scalar_mult (features_1, features_1));
@@ -80,7 +80,8 @@ sp_movie RecommendationSystem::recommend_by_content (const User &user)
   for (const auto &pair: _movie_map)
   {
     if (user.get_ranks ().find (pair.first) == user.get_ranks ().end () || user
-                                        .get_ranks ().at (pair.first) == 0)
+                                                                               .get_ranks ().at (pair.first)
+                                                                           == 0)
     {
       double similarity = calculate_features_similarity (user_profile,
                                                          pair.second);
