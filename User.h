@@ -27,15 +27,15 @@ class User
    * Constructor for the class
    */
   // TODO User() this constructor can be implemented however you want
-  User (std::string user_name, rank_map r_map,
-        std::shared_ptr<RecommendationSystem> rs);
+  User (std::string  user_name, rank_map& r_map,
+        std::shared_ptr<RecommendationSystem>& rs);
 
   /**
    * a getter for the user's name
    * @return the username
    */
   // TODO get_name()
-  const std::string& get_name() const;
+  std::string get_name() const;
 
   /**
    * function for adding a movie to the DB
@@ -54,7 +54,7 @@ class User
    * @return
    */
   // TODO get_ranks()
-  const rank_map& get_ranks() const;
+  rank_map get_ranks() const;
 
   /**
    * returns a recommendation according to the movie's content
@@ -86,7 +86,7 @@ class User
    * @return output stream
    */
   // TODO &operator<<
-  friend std::ostream &operator<<(std::ostream &os, const User &user);
+  friend std::ostream &operator<<(std::ostream& os, const User& user);
 };
 
 #endif //USER_H

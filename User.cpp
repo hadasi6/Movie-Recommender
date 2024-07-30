@@ -1,15 +1,18 @@
 #include "User.h"
+
+#include <utility>
 #include "RecommendationSystem.h"
 
-User::User (std::string user_name, rank_map r_map,
-            std::shared_ptr<RecommendationSystem> rs)
-{
-  _user_name = std::move (user_name);
-  _rank_map = std::move (r_map);
-  _system = std::move (rs);
-}
+User::User (std::string  user_name, rank_map& r_map,
+            std::shared_ptr<RecommendationSystem>& rs): _user_name
+            (std::move(user_name)), _rank_map(r_map), _system(rs) {}
+//{
+//  _user_name = std::move (user_name);
+//  _rank_map = std::move (r_map);
+//  _system = std::move (rs);
+//}
 
-const std::string &User::get_name () const
+std::string User::get_name () const
 {
   return _user_name;
 }
@@ -17,17 +20,17 @@ const std::string &User::get_name () const
 void User::add_movie_to_user (const std::string &name, int year,
                               const features_list &features, double rate)
 {
-  _system->add_movie_to_rs (name, year, features);
-  sp_movie cur_movie = std::make_shared<Movie> (name, year);
-  //   Movie cur_movie(name, year);
-  if (_rank_map.find (cur_movie) == _rank_map.end ())
-  {
-    _rank_map.insert ({cur_movie, rate});
-  }
-  _rank_map[cur_movie] = rate;
+  sp_movie cur_new_movie = _system->add_movie_to_rs (name, year, features);
+//  sp_movie cur_movie = std::make_shared<Movie> (name, year);
+  _rank_map[cur_new_movie] = rate;
+//  if (_rank_map.find (cur_movie) == _rank_map.end ())
+//  {
+//    _rank_map.insert ({cur_movie, rate});
+//  }
+//  _rank_map[cur_movie] = rate;
 }
 
-const rank_map &User::get_ranks () const
+rank_map User::get_ranks () const
 {
   return _rank_map;
 }
@@ -51,6 +54,7 @@ double User::get_rs_prediction_score_for_movie (const std::string &name, int
 
 std::ostream& operator<<(std::ostream &os, const User &user)
 {
-  os << "name: "<< user._user_name <<std::endl;
+  os << "name: "<< user.get_name() <<"\n";
+  os << user._system<< std::endl;
   return os;
 }
