@@ -11,7 +11,6 @@ std::string &movies_file_path) noexcept(false)
 {
     std::unique_ptr<RecommendationSystem> rs =
         std::make_unique<RecommendationSystem>();
-//  /*fill in ptr_type*/ rs = /*use the right std::make... */
     std::ifstream in_file;
     in_file.open(movies_file_path);
     std::string buffer;

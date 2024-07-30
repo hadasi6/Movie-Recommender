@@ -66,11 +66,13 @@ class User
    * predicts the score for a given movie
    * @param name the name of the movie
    * @param year the year the movie was created
-   * @param k the parameter which represents the number of the most similar movies to predict the score by
+   * @param k the parameter which represents the number of the most similar
+   * movies to predict the score by
    * @return predicted score for the given movie
    */
   double
-  get_rs_prediction_score_for_movie (const std::string &name, int year, int k) const;
+  get_rs_prediction_score_for_movie (const std::string &name, int year, int
+                                      k) const;
 
   /**
    * output stream operator
