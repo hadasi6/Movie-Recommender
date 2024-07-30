@@ -1,25 +1,16 @@
-
 #include "UsersLoader.h"
 
 #define INIT_BUCKET_SIZE 8
 #define ERROR_MSG "input file is incorrect"
 
-//********************************************8
 #include "RecommendationSystem.h"
-
-//*******************************
 
 std::vector<User>
 UsersLoader::create_users
 (const std::string &users_file_path, std::unique_ptr<RecommendationSystem> rs)
 noexcept(false)
-//UsersLoader::create_users
-//    (const std::string &users_file_path, /*ptr_type*/ rs)
-//noexcept(false)
-
 {
     std::shared_ptr<RecommendationSystem> s_rs = std::move (rs);
-//    /* different but still smart ptr_type*/ s_rs = /* use std::move*/
     std::ifstream in_file;
     std::vector<User> users;
     in_file.open(users_file_path);

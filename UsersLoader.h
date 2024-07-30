@@ -1,10 +1,3 @@
-//
-// Created on 2/21/2022.
-//
-
-
-
-
 #ifndef USERFACTORY_H
 #define USERFACTORY_H
 
@@ -14,7 +7,6 @@
 #include "User.h"
 
 #define YEAR_SEPARATOR '-'
-
 
 class UsersLoader
 {
@@ -34,9 +26,6 @@ public:
     static std::vector<User> create_users(const std::string&
     users_file_path, std::unique_ptr<RecommendationSystem> rs) noexcept
     (false);
-//  static std::vector<User> create_users(const std::string& users_file_path, /*ptr_type*/ rs) noexcept(false);
-
 };
-
 
 #endif //USERFACTORY_H

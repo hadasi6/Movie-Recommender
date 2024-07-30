@@ -9,17 +9,13 @@
 #include "Movie.h"
 
 struct sp_movie_comparator {
-    bool operator()(const sp_movie& lhs, const sp_movie& rhs) const {
+    bool operator()(const sp_movie& lhs, const sp_movie& rhs) const
+    {
       return *lhs < *rhs;
     }
 };
 
-//bool SpMovieComparator(const sp_movie& m1, const sp_movie& m2); //todo =del?
-//typedef bool (*compare_func)(const sp_movie& m1, const sp_movie& m2); //?
 typedef std::map<sp_movie, features_list, sp_movie_comparator> movie_map;//?
-
-
-//typedef std::map<sp_movie, features_list, compare_func> rank_map ;//?
 
 class RecommendationSystem
 {
@@ -80,16 +76,11 @@ public:
 	 * @param year year movie was made
 	 * @return shared pointer to movie in system
 	 */
-	//TODO get_movie
     std::shared_ptr<Movie> get_movie(const std::string& name, int year)
     const;
 
-
-	// TODO operator<<
     friend std::ostream& operator<<(std::ostream &os, const
     RecommendationSystem &rs);
-
-
 };
 
 

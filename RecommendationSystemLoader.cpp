@@ -5,8 +5,6 @@
 #define YEAR_SEPARATOR '-'
 #define ERROR_MSG "input file is incorrect"
 
-//std::shared_ptr<RecommendationSystem> RecommendationSystemLoader::create_rs_from_movies(const
-//std::string &movies_file_path) noexcept(false)
 std::unique_ptr<RecommendationSystem>
     RecommendationSystemLoader::create_rs_from_movies(const
 std::string &movies_file_path) noexcept(false)

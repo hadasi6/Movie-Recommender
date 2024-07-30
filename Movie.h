@@ -10,7 +10,7 @@
 
 class Movie;
 
-typedef std::shared_ptr<Movie> sp_movie; // define your smart pointer
+typedef std::shared_ptr<Movie> sp_movie;
 
 /**
  * those declartions and typedefs are given to you and should be used in the ex
@@ -32,20 +32,18 @@ class Movie
    * @param name: name of movie
    * @param year: year it was made
    */
-  Movie (const std::string& name, int year);
+  Movie (std::string  name, int year);
 
   /**
    * returns the name of the movie
    * @return const ref to name of movie
    */
-  //TODO get_name();
   std::string get_name () const;
 
   /**
    * returns the year the movie was made
    * @return year movie was made
    */
-  //TODO get_year();
   int get_year () const;
 
   /**
@@ -55,7 +53,6 @@ class Movie
    * @return returns true if (lhs.year) < rhs.year or
    * (rhs.year == lhs.year & lhs.name < rhs.name) else return false
    */
-  //TODO operator<;
   friend bool operator< (const Movie &lhs, const Movie &rhs);
 
 
@@ -64,7 +61,6 @@ class Movie
    * @param os ostream to output info with
    * @param movie movie to output
    */
-  // TODO operator<<;
   friend std::ostream &operator<< (std::ostream &os, const Movie &movie);
 };
 

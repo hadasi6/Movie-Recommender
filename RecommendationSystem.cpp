@@ -1,30 +1,15 @@
-//
-// Created by Owner on 26/07/2024.
-//
-
 #include <algorithm>
 #include "cmath"
 #include "RecommendationSystem.h"
-#define NA_UNWATCHED "NA"
-
-//RecommendationSystem::RecommendationSystem();
-
-//bool SpMovieComparator(const sp_movie &m1, const sp_movie &m2)
-//{
-//return (*m1 < *m2);
-// }
 
 sp_movie RecommendationSystem::add_movie_to_rs(const std::string &name,
                                                int year,
                                                const features_list &features)
 {
   sp_movie cur_movie =  std::make_shared<Movie>(name, year);
-//  auto res = _movie_map.insert ({cur_movie, features});
   _movie_map[cur_movie] = features;
   return cur_movie;
-//  return res.first->first;
 }
-
 
 double RecommendationSystem::scalar_mult(const features_list
                    &features_1, const features_list &features_2)
@@ -36,7 +21,6 @@ double RecommendationSystem::scalar_mult(const features_list
   }
   return sum;
 }
-
 
 double RecommendationSystem::calculate_features_similarity (const features_list
                     &features_1, const features_list &features_2)
@@ -76,22 +60,19 @@ rank_map create_user_norm_rank(rank_map user_rank)
 sp_movie RecommendationSystem::recommend_by_content (const User &user)
 {
   //stage 1: calculate user ranks' average and subtract it from its ranks.
-
-//  rank_map norm_rank = user.get_ranks(); //todo ?
   rank_map norm_rank = create_user_norm_rank (user.get_ranks());
 
-//  features_list user_profile;
-//  int num_features = _movie_map.begin()->second.size();
   features_list user_profile(_movie_map.begin()->second.size(), 0.0);
 
   for (const auto &pair: norm_rank)
   {
     if (pair.second != 0)
-    auto movie_it = _movie_map.find (pair.first);
+    {
       const features_list &features = _movie_map.find (pair.first)->second;
       for (size_t i = 0; i < features.size (); i++)
       {
         user_profile[i] += pair.second * features[i];
+      }
     }
   }
 
@@ -114,76 +95,11 @@ sp_movie RecommendationSystem::recommend_by_content (const User &user)
 }
 
 
-
-//sp_movie RecommendationSystem::recommend_by_content (const User &user)
-//{
-//  //stage 1: calculate user ranks' average and subtract it from its ranks.
-//  double sum_ranks=0;
-//  double count = 0;
-////  rank_map norm_rank; //?
-//  rank_map norm_rank = user.get_ranks(); //todo ?
-////  double ranks_average;
-//  for (const auto & it : user.get_ranks())
-//  {
-//    sum_ranks += it.second;
-//    count += 1;
-//  }
-//
-//  double ranks_average = sum_ranks / count;
-//  for (const auto & it: user.get_ranks())
-//  {
-//    norm_rank[it.first] = it.second-ranks_average;
-//  }
-//
-//  features_list user_profile;
-//
-//  for (const auto &pair: _movie_map)
-//  {
-//    if (!pair.second.empty ())
-//    {
-//      user_profile = std::vector<double> (pair.second.size (), 0.0);
-//      break;
-//    }
-//  }
-//
-//  for (const auto &it: norm_rank)
-//  {
-//    auto movie_it = _movie_map.find (it.first);
-//    if (movie_it != _movie_map.end ())
-//    {
-//      const features_list &features = movie_it->second;
-//      for (size_t i = 0; i < features.size (); i++)
-//      {
-//        user_profile[i] += it.second * features[i];
-//      }
-//    }
-//  }
-//
-//    sp_movie best_movie = nullptr;
-//    double highest_score = 0;
-//    for (const auto &pair: _movie_map)
-//    {
-//      if (user.get_ranks().find(pair.first) == user.get_ranks().end())
-//      {
-//        double similarity = calculate_features_similarity (user_profile,
-//                                                           pair.second);
-//        if (similarity>highest_score)
-//        {
-//          highest_score = similarity;
-//          best_movie = pair.first;
-//        }
-//      }
-//    }
-//  return best_movie;
-//}
-
-
 sp_movie RecommendationSystem::recommend_by_cf (const User &user, int k)
 {
-//  std::set<>
   sp_movie best_movie = nullptr;
   bool flag_first_movie = false;
-  double highest_predict_score = -1.0; // todo if rate=0
+  double highest_predict_score = -1.0;
   for (const auto &pair: _movie_map)
   {
     if (user.get_ranks().find (pair.first)== user.get_ranks().end())

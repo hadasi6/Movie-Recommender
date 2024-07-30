@@ -1,7 +1,3 @@
-//
-// Created on 2/20/2022.
-//
-
 #ifndef USER_H
 #define USER_H
 #include <unordered_map>
@@ -26,7 +22,6 @@ class User
   /**
    * Constructor for the class
    */
-  // TODO User() this constructor can be implemented however you want
   User (std::string  user_name, rank_map& r_map,
         std::shared_ptr<RecommendationSystem>& rs);
 
@@ -34,7 +29,6 @@ class User
    * a getter for the user's name
    * @return the username
    */
-  // TODO get_name()
   std::string get_name() const;
 
   /**
@@ -53,7 +47,6 @@ class User
    * a getter for the ranks map
    * @return
    */
-  // TODO get_ranks()
   rank_map get_ranks() const;
 
   /**
@@ -85,7 +78,6 @@ class User
    * @param user the user
    * @return output stream
    */
-  // TODO &operator<<
   friend std::ostream &operator<<(std::ostream& os, const User& user);
 };
 

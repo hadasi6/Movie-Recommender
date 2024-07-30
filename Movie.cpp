@@ -1,15 +1,11 @@
-
 #include "Movie.h"
-
 #include <utility>
 
 #define HASH_START 17
 #define RES_MULT 31
 
-//*********************************************************
-
-Movie::Movie (const std::string& name, int year): _name(name), _year
-(year) {}
+Movie::Movie (std::string  name, int year): _name(std::move(name)),
+_year(year) {}
 
  std::string Movie::get_name () const
 {
@@ -22,7 +18,7 @@ int Movie::get_year () const
 }
 
 
-bool operator<(const Movie &lhs, const Movie &rhs) //todo-if this==other->false?
+bool operator<(const Movie &lhs, const Movie &rhs)
 {
   if (lhs.get_year() < rhs.get_year())
   {
@@ -40,8 +36,6 @@ std::ostream &operator<<(std::ostream &os, const Movie &movie)
   os << movie.get_name() << " (" <<movie.get_year()<< ")\n";
   return os;
 }
-
-//*************************************************
 
 
 /**

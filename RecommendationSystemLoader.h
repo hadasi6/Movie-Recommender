@@ -15,8 +15,6 @@ class RecommendationSystemLoader {
    * @return smart pointer to a RecommendationSystem which was created with
    * those movies
    */
-//  static /*ptr_type*/ create_rs_from_movies
-//      (const std::string &movies_file_path) noexcept (false);
   static std::unique_ptr<RecommendationSystem> create_rs_from_movies
 	  (const std::string &movies_file_path) noexcept (false);
 };
