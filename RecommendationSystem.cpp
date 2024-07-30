@@ -237,7 +237,7 @@ double RecommendationSystem::predict_movie_score (const User &user,
 }
 
 
-[[nodiscard]] sp_movie RecommendationSystem::get_movie (const std::string&
+std::shared_ptr<Movie> RecommendationSystem::get_movie (const std::string&
                                                         name, int year) const
 {
   sp_movie temp_movie = std::make_shared<Movie>(name, year);

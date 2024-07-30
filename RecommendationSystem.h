@@ -45,7 +45,6 @@ public:
      */
 	sp_movie add_movie_to_rs(const std::string& name,int year,const std::vector<double>& features);
 
-
     /**
      * a function that calculates the movie with highest score based on
      * movie features
@@ -82,7 +81,8 @@ public:
 	 * @return shared pointer to movie in system
 	 */
 	//TODO get_movie
-    [[nodiscard]] sp_movie get_movie(const std::string& name, int year) const;
+    std::shared_ptr<Movie> get_movie(const std::string& name, int year)
+    const;
 
 
 	// TODO operator<<
