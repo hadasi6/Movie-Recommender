@@ -22,7 +22,7 @@ bool sp_movie_equal (const sp_movie &m1, const sp_movie &m2);
 
 class Movie
 {
- private: //todo - needed?
+ private:
   std::string _name;
   int _year;
 
@@ -32,14 +32,14 @@ class Movie
    * @param name: name of movie
    * @param year: year it was made
    */
-  Movie (std::string name, int year);
+  Movie (const std::string& name, int year);
 
   /**
    * returns the name of the movie
    * @return const ref to name of movie
    */
   //TODO get_name();
-  const std::string &get_name () const;
+  std::string get_name () const;
 
   /**
    * returns the year the movie was made
@@ -56,7 +56,7 @@ class Movie
    * (rhs.year == lhs.year & lhs.name < rhs.name) else return false
    */
   //TODO operator<;
-  bool operator< (const Movie &other) const;
+  friend bool operator< (const Movie &lhs, const Movie &rhs);
 
 
   /**

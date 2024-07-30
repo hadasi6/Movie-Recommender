@@ -8,10 +8,10 @@
 
 //*********************************************************
 
-Movie::Movie (std::string name, int year): _name(std::move(name)), _year
+Movie::Movie (const std::string& name, int year): _name(name), _year
 (year) {}
 
-const std::string &Movie::get_name () const
+ std::string Movie::get_name () const
 {
   return _name;
 }
@@ -22,22 +22,22 @@ int Movie::get_year () const
 }
 
 
-bool Movie::operator<(const Movie &other) const //todo-if this==other->false?
+bool operator<(const Movie &lhs, const Movie &rhs) //todo-if this==other->false?
 {
-  if (_year < other._year)
+  if (lhs.get_year() < rhs.get_year())
   {
     return true;
   }
-  if (_year == other._year)
+  if (lhs.get_year() == rhs.get_year())
   {
-    return _name < other._name;
+    return lhs.get_name() < rhs.get_name();
   }
   return false;
 }
 
 std::ostream &operator<<(std::ostream &os, const Movie &movie)
 {
-  os << movie._name << " (" <<movie._year<< ")\n";
+  os << movie.get_name() << " (" <<movie.get_year()<< ")\n";
   return os;
 }
 

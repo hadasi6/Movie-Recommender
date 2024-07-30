@@ -8,7 +8,7 @@
 #include "User.h"
 #include "Movie.h"
 
-struct SpMovieComparator {
+struct sp_movie_comparator {
     bool operator()(const sp_movie& lhs, const sp_movie& rhs) const {
       return *lhs < *rhs;
     }
@@ -16,7 +16,7 @@ struct SpMovieComparator {
 
 //bool SpMovieComparator(const sp_movie& m1, const sp_movie& m2); //todo =del?
 //typedef bool (*compare_func)(const sp_movie& m1, const sp_movie& m2); //?
-typedef std::map<sp_movie, features_list, SpMovieComparator> movie_map;//?
+typedef std::map<sp_movie, features_list, sp_movie_comparator> movie_map;//?
 
 
 //typedef std::map<sp_movie, features_list, compare_func> rank_map ;//?
