@@ -21,7 +21,7 @@ class RecommendationSystem
   static double scalar_mult (const features_list &vec1, const features_list
   &vec2);
   static double calculate_features_similarity (const features_list
-                                               &features_1, const features_list &features_2);
+                              &features_1, const features_list &features_2);
 
  public:
 
