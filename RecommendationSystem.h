@@ -14,11 +14,12 @@ struct SpMovieComparator {
     }
 };
 
-//typedef std::unordered_map<sp_movie, features_list , hash_func, equal_func>
-//movie_map;
+//bool SpMovieComparator(const sp_movie& m1, const sp_movie& m2); //todo =del?
+//typedef bool (*compare_func)(const sp_movie& m1, const sp_movie& m2); //?
+typedef std::map<sp_movie, features_list, SpMovieComparator> movie_map;//?
 
-//typedef std::map<sp_movie, features_list, equal_func> movie_map;
-typedef std::map<sp_movie, features_list, SpMovieComparator> movie_map;
+
+//typedef std::map<sp_movie, features_list, compare_func> rank_map ;//?
 
 class RecommendationSystem
 {
@@ -29,7 +30,12 @@ class RecommendationSystem
   features_list &features_2);
 
 public:
-	//explicit RecommendationSystem()
+//  RecommendationSystem(): _movie_map(SpMovieComparator) {}
+//  RecommendationSystem(): _rank_map(sp_movie_compare) {}
+
+
+
+  //explicit RecommendationSystem()
     /**
      * adds a new movie to the system
      * @param name name of movie

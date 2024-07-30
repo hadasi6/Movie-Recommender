@@ -9,6 +9,11 @@
 
 //RecommendationSystem::RecommendationSystem();
 
+//bool SpMovieComparator(const sp_movie &m1, const sp_movie &m2)
+//{
+//return (*m1 < *m2);
+// }
+
 sp_movie RecommendationSystem::add_movie_to_rs(const std::string &name,
                                                int year,
                                                const features_list &features)
