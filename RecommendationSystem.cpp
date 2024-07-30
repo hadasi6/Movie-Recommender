@@ -12,7 +12,7 @@ sp_movie RecommendationSystem::add_movie_to_rs (const std::string &name,
 }
 
 double RecommendationSystem::scalar_mult (const features_list
-                                          &features_1, const features_list &features_2)
+&features_1, const features_list &features_2)
 {
   double sum = 0;
   for (size_t i = 0; i < features_1.size (); i++)
