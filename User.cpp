@@ -1,5 +1,4 @@
 #include "User.h"
-
 #include <utility>
 #include "RecommendationSystem.h"
 
@@ -7,10 +6,7 @@ User::User (std::string  user_name, rank_map& r_map,
             std::shared_ptr<RecommendationSystem>& rs): _user_name
             (std::move(user_name)), _rank_map(r_map), _system(rs) {}
 
-std::string User::get_name () const
-{
-  return _user_name;
-}
+std::string User::get_name () const {return _user_name;}
 
 void User::add_movie_to_user (const std::string &name, int year,
                               const features_list &features, double rate)
@@ -19,10 +15,7 @@ void User::add_movie_to_user (const std::string &name, int year,
   _rank_map[cur_new_movie] = rate;
 }
 
-rank_map User::get_ranks () const
-{
-  return _rank_map;
-}
+rank_map User::get_ranks () const {return _rank_map;}
 
 sp_movie User::get_rs_recommendation_by_content () const
 {
