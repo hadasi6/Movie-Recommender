@@ -1,4 +1,3 @@
-
 #include "RecommendationSystemLoader.h"
 #include <fstream>
 #include <sstream>
@@ -24,9 +23,7 @@ std::string &movies_file_path) noexcept(false)
         std::vector<double> vec;
         while (splitted_line >> ranking)
         {
-            if (ranking <= 0){
-                throw std::invalid_argument(ERROR_MSG);
-            }
+            if (ranking <= 0){throw std::invalid_argument(ERROR_MSG);}
             vec.push_back(ranking);
         }
         size_t end = buffer.find(YEAR_SEPARATOR);
