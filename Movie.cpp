@@ -17,7 +17,6 @@ int Movie::get_year () const
   return _year;
 }
 
-
 bool operator<(const Movie &lhs, const Movie &rhs)
 {
   if (lhs.get_year() < rhs.get_year())
@@ -36,7 +35,6 @@ std::ostream &operator<<(std::ostream &os, const Movie &movie)
   os << movie.get_name() << " (" <<movie.get_year()<< ")\n";
   return os;
 }
-
 
 /**
  * hash function used for a unordered_map (implemented for you)
