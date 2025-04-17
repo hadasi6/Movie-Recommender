@@ -1,9 +1,7 @@
 #include "UsersLoader.h"
-
+#include "RecommendationSystem.h"
 #define INIT_BUCKET_SIZE 8
 #define ERROR_MSG "input file is incorrect"
-
-#include "RecommendationSystem.h"
 
 std::vector<User>
 UsersLoader::create_users
@@ -35,7 +33,6 @@ noexcept(false)
         rank_map ranks(INIT_BUCKET_SIZE,sp_movie_hash, sp_movie_equal);
         while (splitted_line >> ranking)
         {
-
             if (ranking != "NA")
             {
                 int rating = std::stoi(ranking);
