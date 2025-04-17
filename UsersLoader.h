@@ -1,17 +1,14 @@
 #ifndef USERFACTORY_H
 #define USERFACTORY_H
-
+#define YEAR_SEPARATOR '-'
 #include <sstream>
 #include <fstream>
 #include <vector>
 #include "User.h"
 
-#define YEAR_SEPARATOR '-'
-
 class UsersLoader
 {
 private:
-
 
 public:
     UsersLoader() = delete;
