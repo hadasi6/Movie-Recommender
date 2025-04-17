@@ -25,7 +25,6 @@ class RecommendationSystem
 
  public:
 
-  //explicit RecommendationSystem()
   /**
    * adds a new movie to the system
    * @param name name of movie
