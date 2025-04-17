@@ -60,9 +60,7 @@ sp_movie RecommendationSystem::recommend_by_content (const User &user)
 {
   //stage 1: calculate user ranks' average and subtract it from its ranks.
   rank_map norm_rank = create_user_norm_rank (user.get_ranks ());
-
   features_list user_profile (_movie_map.begin ()->second.size (), 0.0);
-
   for (const auto &pair: norm_rank)
   {
     if (pair.second != 0)
@@ -74,7 +72,6 @@ sp_movie RecommendationSystem::recommend_by_content (const User &user)
       }
     }
   }
-
   sp_movie best_movie = nullptr;
   double highest_score = -1.0;
   for (const auto &pair: _movie_map)
