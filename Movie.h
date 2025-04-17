@@ -1,10 +1,8 @@
 #ifndef INC_23B_C_C__EX5_MOVIE_H
 #define INC_23B_C_C__EX5_MOVIE_H
-
 #include <iostream>
 #include <vector>
 #include <memory>
-
 #define HASH_START 17
 
 class Movie;
@@ -53,7 +51,6 @@ class Movie
    * (rhs.year == lhs.year & lhs.name < rhs.name) else return false
    */
   friend bool operator< (const Movie &lhs, const Movie &rhs);
-
 
   /**
    * operator<< for movie
