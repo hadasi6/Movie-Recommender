@@ -42,7 +42,6 @@ class User
                           const std::vector<double> &features,
                           double rate);
 
-
   /**
    * a getter for the ranks map
    * @return
